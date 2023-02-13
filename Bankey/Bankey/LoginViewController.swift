@@ -76,13 +76,6 @@ extension LoginViewController: Styled {
     }
 }
 
-//MARK: - Validations
-extension LoginViewController {
-    private func validateUsernameAndPassword() {
-        
-    }
-}
-
 //MARK: - Actions
 extension LoginViewController {
     @objc
