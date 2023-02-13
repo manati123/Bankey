@@ -7,10 +7,21 @@
 
 import UIKit
 
+protocol LogoutDelegate: AnyObject {
+    func didLogout()
+}
+
+protocol LoginViewControllerDelegate: AnyObject {
+    func didLogin()
+}
+
 class LoginViewController: UIViewController {
     
     let loginView: LoginView = .init()
     let titleAndSubtitleView: TitleAndSubtitleView = .init()
+    
+    weak var delegate: LoginViewControllerDelegate?
+    
     let bottomStackView: UIStackView = .init()
     let signInButton: UIButton = .init(type: .system)
     let errorLabel: UILabel = .init()
@@ -92,6 +103,7 @@ extension LoginViewController {
                 self?.errorLabel.isHidden = false
             } else {
                 self?.errorLabel.isHidden = true
+                self?.delegate?.didLogin()
             }
             self?.signInButton.isEnabled = true
             self?.activityIndicatorView.stopAnimating()
