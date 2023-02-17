@@ -97,13 +97,14 @@ extension LoginViewController {
     private func login() {
         activityIndicatorView.startAnimating()
         signInButton.isEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
             if self?.loginView.validateTextFieldsNotEmpty() == false {
                 self?.errorLabel.text = "Username / password cannot be blank!"
                 self?.errorLabel.isHidden = false
             } else {
                 self?.errorLabel.isHidden = true
                 self?.delegate?.didLogin()
+                self?.loginView.emptyFields()
             }
             self?.signInButton.isEnabled = true
             self?.activityIndicatorView.stopAnimating()

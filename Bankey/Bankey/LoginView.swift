@@ -90,4 +90,9 @@ extension LoginView {
     func validateTextFieldsNotEmpty() -> Bool {
         usernameTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false
     }
+    
+    func emptyFields() {
+        usernameTextField.text = ""
+        passwordTextField.text = ""
+    }
 }

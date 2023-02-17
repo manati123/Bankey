@@ -21,8 +21,20 @@ class OnboardingContainerViewController: UIViewController {
     var pages = [UIViewController]()
     weak var delegate: OnboardingContainerViewControllerDelegate?
     
-    var currentViewController: UIViewController
+    var currentViewController: UIViewController {
+        didSet {
+            guard let index = pages.firstIndex(of: currentViewController) else { return }
+            nextButton.isHidden = index == pages.count - 1
+            backButton.isHidden = index == 0
+            doneButton.isHidden = !nextButton.isHidden
+        }
+    }
+    
+    
     let closeButton: UIButton = .init(type: .system)
+    let nextButton: UIButton = .init(type: .system)
+    let backButton: UIButton = .init(type: .system)
+    let doneButton: UIButton = .init(type: .system)
     
     let slides: [OnboardingSlideModel] = [
         OnboardingSlideModel(heroImageName: "delorean", titleText: "Bankey is faster, easier to use, and has a brand new look and feel that will make you feel like you are back in the 80s."),
@@ -81,14 +93,36 @@ extension OnboardingContainerViewController: Styled {
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         closeButton.setTitle("Close", for: [])
         closeButton.addTarget(self, action: #selector(closeTapped), for: .primaryActionTriggered)
+        
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        backButton.setTitle("Back", for: [])
+        backButton.addTarget(self, action: #selector(backTapped), for: .primaryActionTriggered)
+        
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        nextButton.setTitle("Next", for: [])
+        nextButton.addTarget(self, action: #selector(nextTapped), for: .primaryActionTriggered)
+        
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        doneButton.setTitle("Done", for: [])
+        doneButton.addTarget(self, action: #selector(doneTapped), for: .primaryActionTriggered)
     }
     
     func layout() {
         view.addSubview(closeButton)
+        view.addSubview(nextButton)
+        view.addSubview(doneButton)
+        view.addSubview(backButton)
         
         NSLayoutConstraint.activate([
             closeButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
-            closeButton.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2)])
+            closeButton.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2),
+            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalToSystemSpacingBelow: backButton.bottomAnchor, multiplier: 4),
+            backButton.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 2),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: nextButton.trailingAnchor, multiplier: 2),
+            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalToSystemSpacingBelow: nextButton.bottomAnchor, multiplier: 4),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: doneButton.trailingAnchor, multiplier: 2),
+            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalToSystemSpacingBelow: doneButton.bottomAnchor, multiplier: 4)
+        ])
     }
 }
 
@@ -138,8 +172,9 @@ extension OnboardingContainerViewController {
     @objc func closeTapped(_ sender: UIButton) {
         delegate?.didFinishOnboarding()
     }
+    
     @objc func doneTapped(_ sender: UIButton) {
-        
+        UserDefaultsService.instance.storeUserOnboardingStatus()
         delegate?.didFinishOnboarding()
     }
 }

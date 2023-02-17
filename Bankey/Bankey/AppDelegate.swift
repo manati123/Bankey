@@ -11,26 +11,56 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    let loginViewControllerContainer = LoginViewController()
+    let onboardingViewControllerContainer = OnboardingContainerViewController()
+    let dummyViewController = DummyViewController()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.backgroundColor = .systemBackground
-        window?.rootViewController = LoginViewController()
+        loginViewControllerContainer.delegate = self
+        onboardingViewControllerContainer.delegate = self
+        dummyViewController.delegate = self
+        window?.rootViewController = loginViewControllerContainer
         
         return true
     }
 }
 
-extension AppDelegate: LoginViewControllerDelegate {
+extension AppDelegate: LoginViewControllerDelegate, LogoutDelegate {
     func didLogin() {
-        window?.rootViewController = OnboardingContainerViewController()
+        if UserDefaultsService.instance.isUserOnboarded() == true {
+            changeCurrentViewController(dummyViewController)
+        }
+        else {
+            changeCurrentViewController(onboardingViewControllerContainer)
+        }
+    }
+    
+    func didLogout() {
+        changeCurrentViewController(loginViewControllerContainer)
+        
     }
 }
 
 extension AppDelegate: OnboardingContainerViewControllerDelegate {
     func didFinishOnboarding() {
-        print("Foo")
+        changeCurrentViewController(dummyViewController)
+    }
+}
+
+extension AppDelegate {
+    func changeCurrentViewController(_ viewController: UIViewController, animated: Bool = true) {
+        guard animated, let window = self.window else {
+            self.window?.rootViewController = viewController
+            self.window?.makeKeyAndVisible()
+            return
+        }
+        
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        UIView.transition(with: window, duration: 0.5, options: .transitionFlipFromRight, animations: nil, completion: nil)
     }
 }
