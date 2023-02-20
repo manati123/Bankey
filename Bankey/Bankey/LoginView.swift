@@ -72,7 +72,8 @@ extension LoginView: Styled {
 
 extension LoginView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.endEditing(true)
+        usernameTextField.endEditing(true)
+        passwordTextField.endEditing(true)
         return true
     }
     
@@ -88,5 +89,10 @@ extension LoginView: UITextFieldDelegate {
 extension LoginView {
     func validateTextFieldsNotEmpty() -> Bool {
         usernameTextField.text?.isEmpty == false && passwordTextField.text?.isEmpty == false
+    }
+    
+    func emptyFields() {
+        usernameTextField.text = ""
+        passwordTextField.text = ""
     }
 }

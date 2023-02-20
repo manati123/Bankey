@@ -7,10 +7,21 @@
 
 import UIKit
 
+protocol LogoutDelegate: AnyObject {
+    func didLogout()
+}
+
+protocol LoginViewControllerDelegate: AnyObject {
+    func didLogin()
+}
+
 class LoginViewController: UIViewController {
     
     let loginView: LoginView = .init()
     let titleAndSubtitleView: TitleAndSubtitleView = .init()
+    
+    weak var delegate: LoginViewControllerDelegate?
+    
     let bottomStackView: UIStackView = .init()
     let signInButton: UIButton = .init(type: .system)
     let errorLabel: UILabel = .init()
@@ -76,13 +87,6 @@ extension LoginViewController: Styled {
     }
 }
 
-//MARK: - Validations
-extension LoginViewController {
-    private func validateUsernameAndPassword() {
-        
-    }
-}
-
 //MARK: - Actions
 extension LoginViewController {
     @objc
@@ -93,12 +97,14 @@ extension LoginViewController {
     private func login() {
         activityIndicatorView.startAnimating()
         signInButton.isEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
             if self?.loginView.validateTextFieldsNotEmpty() == false {
                 self?.errorLabel.text = "Username / password cannot be blank!"
                 self?.errorLabel.isHidden = false
             } else {
                 self?.errorLabel.isHidden = true
+                self?.delegate?.didLogin()
+                self?.loginView.emptyFields()
             }
             self?.signInButton.isEnabled = true
             self?.activityIndicatorView.stopAnimating()
