@@ -24,19 +24,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         loginViewController.delegate = self
         onboardingViewController.delegate = self
         
-        let viewController = mainViewController
-        UINavigationBar.appearance().isTranslucent = true
-        UINavigationBar.appearance().backgroundColor = appColor
-        window?.rootViewController = viewController
+        displayLogin()
         
         return true
+    }
+    
+    private func displayLogin() {
+        changeCurrentViewController(loginViewController)
+    }
+    
+    private func displayNextScreen() {
+        if UserDefaultsService.instance.onboarded == true {
+            prepMainView()
+            changeCurrentViewController(mainViewController)
+        } else {
+            changeCurrentViewController(onboardingViewController)
+        }
+    }
+    
+    private func prepMainView() {
+        mainViewController.setStatusBar()
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().backgroundColor = appColor
     }
 }
 
 extension AppDelegate: LoginViewControllerDelegate, LogoutDelegate {
     func didLogin() {
-        UserDefaultsService.instance.onboarded == true ?
-        changeCurrentViewController(mainViewController) : changeCurrentViewController(onboardingViewController)
+        displayNextScreen()
     }
     
     func didLogout() {
@@ -46,8 +61,8 @@ extension AppDelegate: LoginViewControllerDelegate, LogoutDelegate {
 
 extension AppDelegate: OnboardingContainerViewControllerDelegate {
     func didFinishOnboarding() {
-        UserDefaultsService.instance.onboarded = true
-        changeCurrentViewController(loginViewController)
+        prepMainView()
+        changeCurrentViewController(mainViewController)
     }
 }
 
