@@ -16,4 +16,13 @@ extension UIView {
             self.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
+    
+    func constraintEqualToView(of view: UIView) {
+        NSLayoutConstraint.activate([
+            self.topAnchor.constraint(equalTo: view.topAnchor),
+            self.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            self.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            self.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+    }
 }
