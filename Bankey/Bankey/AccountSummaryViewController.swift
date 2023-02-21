@@ -28,6 +28,10 @@ class AccountSummaryViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.register(AccountSummaryCell.self, forCellReuseIdentifier: AccountSummaryCell.reuseID)
+        tableView.rowHeight = AccountSummaryCell.rowHeight
+        tableView.tableFooterView = UIView()
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         
@@ -47,8 +51,7 @@ class AccountSummaryViewController: UIViewController {
 
 extension AccountSummaryViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = games[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: AccountSummaryCell.reuseID, for: indexPath) as! AccountSummaryCell
         return cell
     }
     
@@ -60,38 +63,3 @@ extension AccountSummaryViewController: UITableViewDelegate, UITableViewDataSour
         
     }
 }
-
-//class AccountSummaryViewController: UIViewController {
-//
-//    let stackView: UIStackView = .init()
-//    let label: UILabel = .init()
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        style()
-//        layout()
-//    }
-//}
-//
-//extension AccountSummaryViewController: Styled {
-//    func style() {
-//        view.backgroundColor = .red
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//        stackView.axis = .vertical
-//        stackView.spacing = 20
-//
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "WELCOME"
-//    }
-//
-//    func layout() {
-//        stackView.addArrangedSubview(label)
-//        view.addSubview(stackView)
-//
-//        NSLayoutConstraint.activate([
-//            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-//        ])
-//    }
-//}

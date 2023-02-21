@@ -26,6 +26,7 @@
 		F97EFAF729A4D82100FDB410 /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97EFAF629A4D82100FDB410 /* UIView+Utils.swift */; };
 		F97EFAF929A4DA7C00FDB410 /* AccountSummaryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97EFAF829A4DA7C00FDB410 /* AccountSummaryHeaderView.swift */; };
 		F97EFAFC29A4DAA600FDB410 /* AccountSummaryHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F97EFAFB29A4DAA600FDB410 /* AccountSummaryHeaderView.xib */; };
+		F97EFAFE29A4E49600FDB410 /* AccountSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97EFAFD29A4E49600FDB410 /* AccountSummaryCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		F97EFAF629A4D82100FDB410 /* UIView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
 		F97EFAF829A4DA7C00FDB410 /* AccountSummaryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSummaryHeaderView.swift; sourceTree = "<group>"; };
 		F97EFAFB29A4DAA600FDB410 /* AccountSummaryHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountSummaryHeaderView.xib; sourceTree = "<group>"; };
+		F97EFAFD29A4E49600FDB410 /* AccountSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSummaryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,9 +162,9 @@
 		F97EFAEB29A4AE3C00FDB410 /* AccountSummary */ = {
 			isa = PBXGroup;
 			children = (
+				F97EFB0029A4E85C00FDB410 /* Cells */,
+				F97EFAFF29A4E84900FDB410 /* Header */,
 				F97EFAEC29A4AE5200FDB410 /* AccountSummaryViewController.swift */,
-				F97EFAF829A4DA7C00FDB410 /* AccountSummaryHeaderView.swift */,
-				F97EFAFB29A4DAA600FDB410 /* AccountSummaryHeaderView.xib */,
 			);
 			name = AccountSummary;
 			sourceTree = "<group>";
@@ -200,6 +202,23 @@
 				F97EFAF629A4D82100FDB410 /* UIView+Utils.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		F97EFAFF29A4E84900FDB410 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				F97EFAF829A4DA7C00FDB410 /* AccountSummaryHeaderView.swift */,
+				F97EFAFB29A4DAA600FDB410 /* AccountSummaryHeaderView.xib */,
+			);
+			name = Header;
+			sourceTree = "<group>";
+		};
+		F97EFB0029A4E85C00FDB410 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F97EFAFD29A4E49600FDB410 /* AccountSummaryCell.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,6 +303,7 @@
 				F97EFAF929A4DA7C00FDB410 /* AccountSummaryHeaderView.swift in Sources */,
 				F97EFAE729A4AC0200FDB410 /* UIViewController+Utils.swift in Sources */,
 				03FE22F7299A742D00AC5AA5 /* OnboardingViewController.swift in Sources */,
+				F97EFAFE29A4E49600FDB410 /* AccountSummaryCell.swift in Sources */,
 				03FE22F2299A62F300AC5AA5 /* TitleAndSubtitleView.swift in Sources */,
 				0310D15A299FAFC6003C9F81 /* UserDefaultsService.swift in Sources */,
 				03FE22EF299A2DB200AC5AA5 /* Styled.swift in Sources */,
