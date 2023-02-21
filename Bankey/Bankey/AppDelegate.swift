@@ -11,9 +11,8 @@ let appColor: UIColor = .systemTeal
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    let loginViewControllerContainer = LoginViewController()
-    let onboardingViewControllerContainer = OnboardingContainerViewController()
-    let dummyViewController = DummyViewController()
+    let loginViewController = LoginViewController()
+    let onboardingViewController = OnboardingContainerViewController()
     let mainViewController = MainViewController()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
@@ -21,10 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.backgroundColor = .systemBackground
-        loginViewControllerContainer.delegate = self
-        onboardingViewControllerContainer.delegate = self
-        dummyViewController.delegate = self
-        window?.rootViewController = mainViewController
+        
+        loginViewController.delegate = self
+        onboardingViewController.delegate = self
+        
+        let viewController = mainViewController
+        UINavigationBar.appearance().isTranslucent = true
+        UINavigationBar.appearance().backgroundColor = appColor
+        window?.rootViewController = viewController
         
         return true
     }
@@ -33,17 +36,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: LoginViewControllerDelegate, LogoutDelegate {
     func didLogin() {
         UserDefaultsService.instance.onboarded == true ?
-        changeCurrentViewController(dummyViewController) : changeCurrentViewController(onboardingViewControllerContainer)
+        changeCurrentViewController(mainViewController) : changeCurrentViewController(onboardingViewController)
     }
     
     func didLogout() {
-        changeCurrentViewController(loginViewControllerContainer)
+        changeCurrentViewController(loginViewController)
     }
 }
 
 extension AppDelegate: OnboardingContainerViewControllerDelegate {
     func didFinishOnboarding() {
-        changeCurrentViewController(dummyViewController)
+        UserDefaultsService.instance.onboarded = true
+        changeCurrentViewController(loginViewController)
     }
 }
 
