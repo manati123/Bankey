@@ -23,6 +23,7 @@
 		F97EFAED29A4AE5200FDB410 /* AccountSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97EFAEC29A4AE5200FDB410 /* AccountSummaryViewController.swift */; };
 		F97EFAF129A4AF3C00FDB410 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97EFAF029A4AF3C00FDB410 /* MoreViewController.swift */; };
 		F97EFAF329A4AF4700FDB410 /* MoveMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97EFAF229A4AF4700FDB410 /* MoveMoneyViewController.swift */; };
+		F97EFAF729A4D82100FDB410 /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97EFAF629A4D82100FDB410 /* UIView+Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		F97EFAEC29A4AE5200FDB410 /* AccountSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSummaryViewController.swift; sourceTree = "<group>"; };
 		F97EFAF029A4AF3C00FDB410 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		F97EFAF229A4AF4700FDB410 /* MoveMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveMoneyViewController.swift; sourceTree = "<group>"; };
+		F97EFAF629A4D82100FDB410 /* UIView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,10 +100,8 @@
 		03FE22E9299A2C2400AC5AA5 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
-				03FE22DD299A28FF00AC5AA5 /* Assets.xcassets */,
-				03FE22DF299A28FF00AC5AA5 /* LaunchScreen.storyboard */,
-				03FE22E2299A28FF00AC5AA5 /* Info.plist */,
-				F97EFAE629A4AC0200FDB410 /* UIViewController+Utils.swift */,
+				F97EFAF529A4D81100FDB410 /* Extensions */,
+				F97EFAF429A4D7FB00FDB410 /* Sample */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -144,11 +144,11 @@
 		F97EFAEA29A4AE2600FDB410 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F97EFAEF29A4AF2F00FDB410 /* More */,
-				F97EFAEE29A4AF2000FDB410 /* MoveMoney */,
-				F97EFAEB29A4AE3C00FDB410 /* AccountSummary */,
 				03FE22EA299A2C3600AC5AA5 /* Login */,
 				03FE22F3299A72DA00AC5AA5 /* Onboarding */,
+				F97EFAEB29A4AE3C00FDB410 /* AccountSummary */,
+				F97EFAEE29A4AF2000FDB410 /* MoveMoney */,
+				F97EFAEF29A4AF2F00FDB410 /* More */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -175,6 +175,25 @@
 				F97EFAF029A4AF3C00FDB410 /* MoreViewController.swift */,
 			);
 			name = More;
+			sourceTree = "<group>";
+		};
+		F97EFAF429A4D7FB00FDB410 /* Sample */ = {
+			isa = PBXGroup;
+			children = (
+				03FE22DD299A28FF00AC5AA5 /* Assets.xcassets */,
+				03FE22DF299A28FF00AC5AA5 /* LaunchScreen.storyboard */,
+				03FE22E2299A28FF00AC5AA5 /* Info.plist */,
+			);
+			name = Sample;
+			sourceTree = "<group>";
+		};
+		F97EFAF529A4D81100FDB410 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F97EFAE629A4AC0200FDB410 /* UIViewController+Utils.swift */,
+				F97EFAF629A4D82100FDB410 /* UIView+Utils.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,6 +273,7 @@
 				F97EFAF329A4AF4700FDB410 /* MoveMoneyViewController.swift in Sources */,
 				03FE22D9299A28FE00AC5AA5 /* LoginViewController.swift in Sources */,
 				03FE22D5299A28FE00AC5AA5 /* AppDelegate.swift in Sources */,
+				F97EFAF729A4D82100FDB410 /* UIView+Utils.swift in Sources */,
 				F97EFAE729A4AC0200FDB410 /* UIViewController+Utils.swift in Sources */,
 				03FE22F7299A742D00AC5AA5 /* OnboardingViewController.swift in Sources */,
 				03FE22F2299A62F300AC5AA5 /* TitleAndSubtitleView.swift in Sources */,

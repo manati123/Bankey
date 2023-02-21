@@ -9,20 +9,78 @@ import UIKit
 
 class AccountSummaryViewController: UIViewController {
     
+    let games = ["Pacman", "Tekken 5", "Vallheim"]
+    
+    var tableView: UITableView = .init()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        style()
-        layout()
+        setup()
+    }
+    
+    private func setup() {
+        setupTableView()
+    }
+    
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tableView)
+        
+        tableView.constraintEqualToSafeAreLayoutGuide(of: view)
     }
 }
 
-extension AccountSummaryViewController: Styled {
-    func style() {
-        view.backgroundColor = .red
+extension AccountSummaryViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        cell.textLabel?.text = games[indexPath.row]
+        return cell
     }
     
-    func layout() {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        games.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
 }
+
+//class AccountSummaryViewController: UIViewController {
+//
+//    let stackView: UIStackView = .init()
+//    let label: UILabel = .init()
+//
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//        style()
+//        layout()
+//    }
+//}
+//
+//extension AccountSummaryViewController: Styled {
+//    func style() {
+//        view.backgroundColor = .red
+//        stackView.translatesAutoresizingMaskIntoConstraints = false
+//        stackView.axis = .vertical
+//        stackView.spacing = 20
+//
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.text = "WELCOME"
+//    }
+//
+//    func layout() {
+//        stackView.addArrangedSubview(label)
+//        view.addSubview(stackView)
+//
+//        NSLayoutConstraint.activate([
+//            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+//        ])
+//    }
+//}
