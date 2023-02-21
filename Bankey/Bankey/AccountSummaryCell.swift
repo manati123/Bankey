@@ -9,6 +9,14 @@ import UIKit
 
 class AccountSummaryCell: UITableViewCell {
     
+    enum AccountType: String {
+        case Banking
+        case CreditCard
+        case Investment
+    }
+    
+    let viewModel: ViewModel? = nil
+    
     let typeLabel: UILabel = .init()
     let dividerView: UIView = .init()
     let nameLabel: UILabel = .init()
@@ -33,7 +41,6 @@ class AccountSummaryCell: UITableViewCell {
         
         setup()
     }
-    
 }
 
 extension AccountSummaryCell: Styled {
@@ -67,7 +74,7 @@ extension AccountSummaryCell: Styled {
         
         balanceAmountLabel.translatesAutoresizingMaskIntoConstraints = false
         balanceAmountLabel.textAlignment = .right
-        balanceAmountLabel.attributedText = makeFormattedBalance(currency: "RON", lhsValue: 120000, rhsValue: 11)
+//        balanceAmountLabel.attributedText = makeFormattedBalance(currency: "RON", lhsValue: 120000, rhsValue: 11)
         
         chevronImageView.translatesAutoresizingMaskIntoConstraints = false
         chevronImageView.image = UIImage(systemName: "chevron.right")?.withTintColor(appColor, renderingMode: .alwaysOriginal)
@@ -112,19 +119,25 @@ extension AccountSummaryCell: Styled {
             trailingAnchor.constraint(equalToSystemSpacingAfter: chevronImageView.trailingAnchor, multiplier: 1)
         ])
     }
-    
-    private func makeFormattedBalance(currency: String, lhsValue: Int, rhsValue: Int) -> NSMutableAttributedString {
-        let currencySignAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.preferredFont(forTextStyle: .callout), .baselineOffset: 8]
-        let lhsAttribues: [NSAttributedString.Key: Any] = [.font: UIFont.preferredFont(forTextStyle: .title1)]
-        let rhsAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.preferredFont(forTextStyle: .footnote), .baselineOffset: 8]
+
+}
+
+extension AccountSummaryCell {
+    func configure(with viewModel: ViewModel) {
+        typeLabel.text = viewModel.accountType.rawValue
+        nameLabel.text = viewModel.accountName
+        balanceAmountLabel.attributedText = viewModel.balanceAsAttributedString
         
-        let rootString = NSMutableAttributedString(string: currency, attributes: currencySignAttributes)
-        let lhsString = NSAttributedString(string: String(lhsValue), attributes: lhsAttribues)
-        let rhsString = NSAttributedString(string: String(rhsValue), attributes: rhsAttributes)
-        
-        rootString.append(lhsString)
-        rootString.append(rhsString)
-        return rootString
+        switch viewModel.accountType {
+        case .Banking:
+            dividerView.backgroundColor = appColor
+            balanceLabel.text = "Current balance"
+        case .CreditCard:
+            dividerView.backgroundColor = .systemOrange
+            balanceLabel.text = "Balance"
+        case .Investment:
+            dividerView.backgroundColor = .systemPurple
+            balanceLabel.text = "Value"
+        }
     }
-    
 }
