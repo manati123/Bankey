@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+let appColor: UIColor = .systemTeal
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let loginViewControllerContainer = LoginViewController()
     let onboardingViewControllerContainer = OnboardingContainerViewController()
     let dummyViewController = DummyViewController()
+    let mainViewController = MainViewController()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
@@ -23,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         loginViewControllerContainer.delegate = self
         onboardingViewControllerContainer.delegate = self
         dummyViewController.delegate = self
-        window?.rootViewController = loginViewControllerContainer
+        window?.rootViewController = mainViewController
         
         return true
     }
@@ -31,17 +32,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: LoginViewControllerDelegate, LogoutDelegate {
     func didLogin() {
-        if UserDefaultsService.instance.isUserOnboarded() == true {
-            changeCurrentViewController(dummyViewController)
-        }
-        else {
-            changeCurrentViewController(onboardingViewControllerContainer)
-        }
+        UserDefaultsService.instance.onboarded == true ?
+        changeCurrentViewController(dummyViewController) : changeCurrentViewController(onboardingViewControllerContainer)
     }
     
     func didLogout() {
         changeCurrentViewController(loginViewControllerContainer)
-        
     }
 }
 

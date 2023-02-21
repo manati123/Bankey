@@ -174,7 +174,7 @@ extension OnboardingContainerViewController {
     }
     
     @objc func doneTapped(_ sender: UIButton) {
-        UserDefaultsService.instance.storeUserOnboardingStatus()
+        UserDefaultsService.instance.onboarded = true
         delegate?.didFinishOnboarding()
     }
 }
