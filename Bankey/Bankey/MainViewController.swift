@@ -16,7 +16,6 @@ class MainViewController: UITabBarController {
         setupTabBar()
     }
     
-    
     private func setupViews() {
         //here we are setting up the view controllers
         let summaryViewController = AccountSummaryViewController()
